@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 public static class Hamming
 {
@@ -7,10 +8,6 @@ public static class Hamming
         int distance = 0;
         if (firstStrand.Length != secondStrand.Length) throw new ArgumentException("Strands must be of equal length.");
 
-        for(int i = 0; i < firstStrand.Length; i++) {
-            if (firstStrand[i] != secondStrand[i]) distance++;
-        }
-
-        return distance;
+        return firstStrand.Zip(secondStrand).Count(strand => strand.First != strand.Second);
     }
 }
